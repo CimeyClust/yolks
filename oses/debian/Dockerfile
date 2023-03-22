@@ -38,6 +38,8 @@ RUN	     apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 ## Configure locale
 RUN          update-locale lang=en_US.UTF-8 \
              && dpkg-reconfigure --frontend noninteractive locales
+	     
+RUN	     service docker start
 
 
 WORKDIR     /home/container
