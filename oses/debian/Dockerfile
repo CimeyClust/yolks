@@ -20,11 +20,11 @@ RUN          apt update \
 ## Install dependencies
 RUN          apt install -y gcc g++ libgcc1 libc++-dev gdb libc6 git wget curl tar zip unzip binutils xz-utils liblzo2-2 cabextract iproute2 net-tools netcat telnet libatomic1 libsdl1.2debian libsdl2-2.0-0 \
              libfontconfig libicu67 icu-devtools libunwind8 libssl-dev sqlite3 libsqlite3-dev libmariadbclient-dev-compat libduktape205 locales ffmpeg gnupg gnupg2 apt-transport-https software-properties-common ca-certificates \
-             liblua5.3-0 libz-dev rapidjson-dev tzdata libevent-dev libzip4 libprotobuf23 libfluidsynth2 procps
+             liblua5.3-0 libz-dev rapidjson-dev tzdata libevent-dev libzip4 libprotobuf23 libfluidsynth2 procps apt-utils
 			 
 # Add Docker to Debian Image
 RUN          mkdir -m 0755 -p /etc/apt/keyrings
-RUN          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+RUN          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 RUN          echo \
              "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
              $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
