@@ -24,8 +24,7 @@ RUN          apt install -y gcc g++ libgcc1 libc++-dev gdb libc6 git wget curl t
 			 
 # Add Docker to Debian Image
 RUN          mkdir -m 0755 -p /etc/apt/keyrings
-RUN          curl -fsSL https://download.docker.com/linux/ubuntu/gpg
-RUN          gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+RUN          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 RUN          echo \
              "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
              $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
