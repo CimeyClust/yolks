@@ -23,16 +23,17 @@ RUN          apt install -y gcc g++ libgcc1 libc++-dev gdb libc6 git wget curl t
              liblua5.3-0 libz-dev rapidjson-dev tzdata libevent-dev libzip4 libprotobuf23 libfluidsynth2 procps
 			 
 # Add Docker to Debian Image
-RUN          curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-RUN          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | \
-             tee /etc/apt/sources.list.d/docker.list > /dev/null
+RUN          mkdir -m 0755 -p /etc/apt/keyrings
+RUN          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+RUN          echo \
+             "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+             $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 	     
-RUN	     apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-			 
 ## Update packages
 RUN          apt update \
              && apt upgrade -y
+	     
+RUN	     apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 ## Configure locale
 RUN          update-locale lang=en_US.UTF-8 \
