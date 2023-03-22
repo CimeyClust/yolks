@@ -35,4 +35,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/CimeyClust/yolks:${{ matrix.oses }}
+            ghcr.io/verox001/yolks:${{ matrix.oses }}
