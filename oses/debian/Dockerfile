@@ -14,7 +14,7 @@ RUN          ln -s /home/container/ /nonexistent
 ENV          USER=container HOME=/home/container
 
 ## Update base packages
-RUN          apt update
+RUN          apt update && upgrade -y
 
 ## Install dependencies
 RUN          apt install -y gcc g++ libgcc1 libc++-dev gdb libc6 git wget curl tar zip unzip binutils xz-utils liblzo2-2 cabextract iproute2 net-tools netcat telnet libatomic1 libsdl1.2debian libsdl2-2.0-0 \
@@ -31,8 +31,7 @@ RUN          echo \
 RUN	     chmod a+r /etc/apt/keyrings/docker.gpg
 	     
 ## Update packages
-RUN          apt update \
-             && apt upgrade -y
+RUN          apt update
 	     
 RUN	     apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
