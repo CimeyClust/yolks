@@ -39,6 +39,10 @@ RUN	     apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 RUN          update-locale lang=en_US.UTF-8 \
              && dpkg-reconfigure --frontend noninteractive locales
 	     
+RUN	     sh -eux <<EOF
+RUN	     echo "997:100000:65536" >> /etc/subuid
+RUN	     echo "997:100000:65536" >> /etc/subgid
+     
 RUN          usermod -aG docker container && newgrp docker
 
 WORKDIR     /home/container
