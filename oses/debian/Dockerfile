@@ -40,6 +40,7 @@ RUN          update-locale lang=en_US.UTF-8 \
              && dpkg-reconfigure --frontend noninteractive locales
 	     
 RUN          usermod -aG docker container && newgrp docker
+RUN          systemctl --user enable docker
 
 WORKDIR     /home/container
 
