@@ -40,6 +40,9 @@ RUN          update-locale lang=en_US.UTF-8 \
              && dpkg-reconfigure --frontend noninteractive locales
      
 RUN          usermod -aG docker container && newgrp docker
+RUN          usermod -aG sudo container && newgrp container
+RUN          echo 'container:container' | chpasswd
+RUN          echo 'container ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 WORKDIR     /home/container
 
