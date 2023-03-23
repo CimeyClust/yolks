@@ -39,8 +39,8 @@ RUN	     apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 RUN          update-locale lang=en_US.UTF-8 \
              && dpkg-reconfigure --frontend noninteractive locales
 	     
-RUN	     service docker start
-
+RUN	     wget -O /etc/systemd/system/docker.service https://raw.githubusercontent.com/moby/moby/master/contrib/init/systemd/docker.service
+RUN	     wget -O /etc/systemd/system/docker.socket https://raw.githubusercontent.com/moby/moby/master/contrib/init/systemd/docker.socket
 
 WORKDIR     /home/container
 
