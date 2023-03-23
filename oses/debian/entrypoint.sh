@@ -1,5 +1,4 @@
 #!/bin/bash
-dockerd
 cd /home/container
 
 # Make internal Docker IP address available to processes.
